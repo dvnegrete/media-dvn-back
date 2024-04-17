@@ -1,0 +1,23 @@
+{
+  "name": "media-dvn-back",
+  "version": "1.0.0",
+  "description": "Prueba tecnica Disruptive Studio",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dvnegrete/media-dvn-back.git"
+  },
+  "author": "Damian Valenzuela Negrete",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dvnegrete/media-dvn-back/issues"
+  },
+  "homepage": "https://github.com/dvnegrete/media-dvn-back#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2"
+  }
+}
