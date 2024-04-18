@@ -8,6 +8,10 @@ const themeSchema = Schema({
     description: {
         type: String,
     },
+    categories: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'Category'
+    }]
 });
 
 const Theme = model('Theme', themeSchema);

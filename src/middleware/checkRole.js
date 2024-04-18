@@ -1,7 +1,7 @@
 const { request, response } = require('express');
 const User = require('../models/User');
 
-const checkRole = async (req = request, res = response, next) => {
+const checkRoleCreator = async (req = request, res = response, next) => {
     try {
         const { username } = req.headers;
         const [userDB] = await User.find({ username });
@@ -51,4 +51,4 @@ const checkRoleAdmin = async (req = request, res = response, next) => {
     }
 };
 
-module.exports = { checkRole, checkRoleAdmin }
+module.exports = { checkRoleCreator, checkRoleAdmin }

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { checkRole, checkRoleAdmin } = require("../middleware/checkRole");
+const { checkRoleCreator, checkRoleAdmin } = require("../middleware/checkRole");
 const { createTheme } = require("../controller/theme.controller");
 
 const router = Router();

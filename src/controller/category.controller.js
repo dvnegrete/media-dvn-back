@@ -2,31 +2,35 @@ const { request, response } = require('express');
 const Category = require('../models/Category');
 
 const getCategory = async (req = request, res = response) => {
+    try {
+        const findCategory = await Category.find();
+        if (!findCategory) {
+            res.status(400).json({
+                msg: 'Category already exists'
+            });
+        }
 
-    // const category = await Category.find();
-    // res.json({
-    //     category,
-    // });
-
-    console.log("CONTROLLER category");
-     res.json({
-       msg: "ahi vamos..."
-    });
+        res.json({
+            findCategory
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 const createCategory = async (req, res = response) => {
-    const { email } = req.body;
+    const { name } = req.body;
     try {
-        const findEmail = await Category.findOne({ email });
-        if (findEmail) {
+        const findCategory = await Category.findOne({ name });
+        if (findCategory) {
             res.status(400).json({
-                msg: 'Usuario ya registrado....'
+                msg: 'Category already exists'
             });
         }
-        const user = new Category(req.body);
-        await user.save();
+        const category = new Category(req.body);
+        await category.save();
         res.json({
-            user,
+            category,
         });
     } catch (error) {
         console.error(error);

@@ -7,7 +7,9 @@ const categorySchema = Schema({
     },
     description: {
         type: String,
-    }
+    },
+    allowedFileTypes : [String],
+    allowedExtensions: [String]
 });
 
 const Category = model('Category', categorySchema);
