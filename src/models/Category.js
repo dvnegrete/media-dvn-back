@@ -8,8 +8,11 @@ const categorySchema = Schema({
     description: {
         type: String,
     },
+    image: {
+        type: String,
+    },
     allowedFileTypes : [String],
-    allowedExtensions: [String]
+    //allowedExtensions: [String]
 });
 
 const Category = model('Category', categorySchema);

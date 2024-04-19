@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const { port } = require('./config');
 const { dbConnection } = require('./database/config');
@@ -6,7 +7,7 @@ const { dbConnection } = require('./database/config');
 const app = express();
 
 //CORS
-//app.use(cors());
+app.use(cors());
 
 app.use( express.json() );
 

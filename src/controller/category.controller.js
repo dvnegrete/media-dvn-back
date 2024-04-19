@@ -9,10 +9,7 @@ const getCategory = async (req = request, res = response) => {
                 msg: 'Category already exists'
             });
         }
-
-        res.json({
-            findCategory
-        });
+        res.json(findCategory);
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "Internal Error Server" })
