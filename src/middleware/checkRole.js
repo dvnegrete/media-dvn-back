@@ -19,10 +19,8 @@ const checkRoleCreator = async (req = request, res = response, next) => {
         next();
 
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            msg: 'Server Error'
-        })
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 };
 
@@ -44,10 +42,8 @@ const checkRoleAdmin = async (req = request, res = response, next) => {
         next();
 
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            msg: 'Server Error'
-        })
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 };
 

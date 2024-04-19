@@ -2,11 +2,16 @@ const { request, response } = require('express');
 const User = require('../models/User');
 
 const getUsers = async (req = request, res = response) => {
+    try {
+        const users = await User.find();
+        res.json({
+            users,
+        });
 
-    const users = await User.find();
-    res.json({
-        users,
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
+    }
 }
 
 const createUsers = async (req = request, res = response) => {
@@ -26,9 +31,23 @@ const createUsers = async (req = request, res = response) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({
-            msg: error.message
-        })
+        res.status(500).json({ msg: "Internal Error Server" })
+    }
+}
+
+const updateUsers = async (req = request, res = response) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOneAndUpdate({ email }, req.body, { new: true });
+        if (!user) {
+            res.status(404).json({
+                msg: 'Not Found'
+            });
+        }
+        res.json({ user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 }
 
@@ -47,12 +66,13 @@ const deleteUsers = async (req = request, res = response) => {
         });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 }
 
 module.exports = {
     getUsers,
     createUsers,
-    // updateUsers, 
+    updateUsers,
     deleteUsers
 }

@@ -17,5 +17,6 @@ dbConnection();
 app.use('/api/user', require('./routes/user.route'));
 app.use('/api/category', require('./routes/category.route'));
 app.use('/api/theme', require('./routes/theme.route'));
+app.use('/api/post', require('./routes/post.route'));
 
-app.listen(port, () => console.log("servidor en el puerto: ", port))
+app.listen(port, () => console.log("Server online"))

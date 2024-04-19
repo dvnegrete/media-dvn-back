@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const { checkRoleCreator, checkRoleAdmin } = require("../middleware/checkRole");
-const { createTheme } = require("../controller/theme.controller");
+const { getTheme, createTheme, updateTheme, deleteTheme } = require("../controller/theme.controller");
 
 const router = Router();
 
-//router.get('/', checkRole, getTheme);
+router.get('/', checkRoleCreator, getTheme);
 router.post('/', checkRoleAdmin, createTheme);
+router.put('/', checkRoleAdmin, updateTheme);
+router.delete('/', checkRoleAdmin, deleteTheme);
 
 module.exports = router;

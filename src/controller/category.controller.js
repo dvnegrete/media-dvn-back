@@ -15,6 +15,7 @@ const getCategory = async (req = request, res = response) => {
         });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 }
 
@@ -34,12 +35,51 @@ const createCategory = async (req, res = response) => {
         });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
+    }
+}
+
+const updatedCategory = async (req, res = response) => {
+    // const { name } = req.body;
+    // try {
+    //     const category = await Category.findOne({ name });
+    //     if (!category) {
+    //         res.status(404).json({
+    //             msg: 'Not Found'
+    //         });
+    //     }
+    //     await Category.findByIdAndDelete(category);
+    //     res.json({
+    //         msg: `Category ${name} deleted`
+    //     });
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ msg: "Internal Error Server" })
+    // }
+}
+
+const deleteCategory = async (req, res = response) => {
+    const { name } = req.body;
+    try {
+        const category = await Category.findOne({ name });
+        if (!category) {
+            res.status(404).json({
+                msg: 'Not Found'
+            });
+        }
+        await Category.findByIdAndDelete(category);
+        res.json({
+            msg: `Category ${name} deleted`
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
     }
 }
 
 module.exports = {
     getCategory,
     createCategory,
-    // updateUsers, 
-    // deleteUsers
+    updatedCategory,
+    deleteCategory
 }
