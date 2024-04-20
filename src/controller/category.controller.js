@@ -27,12 +27,15 @@ const createCategory = async (req, res = response) => {
         }
         const category = new Category(req.body);
         await category.save();
-        res.json({
+        res.json(
             category,
-        });
+        );
     } catch (error) {
         console.error(error);
-        res.status(500).json({ msg: "Internal Error Server" })
+        res.status(500).json({
+            msg: "Internal Error Server",
+            info: error.message
+        })
     }
 }
 
