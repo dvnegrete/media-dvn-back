@@ -23,11 +23,12 @@ const getTheme = async (req = request, res = response) => {
 }
 
 const createTheme = async (req = request, res = response) => {
+
     const { name, description, categories } = req.body;
     try {
         const findTheme = await Theme.findOne({ name });
         if (findTheme) {
-            res.status(400).json({
+            res.status(409).json({
                 msg: 'the theme already exists '
             });
         } else {
@@ -42,9 +43,7 @@ const createTheme = async (req = request, res = response) => {
                 theme.categories.push(category._id);
             }
             await theme.save();
-            res.json({
-                theme,
-            });
+            res.json(theme);
         }
     } catch (error) {
         console.error(error);
@@ -55,7 +54,7 @@ const createTheme = async (req = request, res = response) => {
 const updateTheme = async (req = request, res = response) => {
     const { name } = req.body;
     try {
-        const updated = {...req.body, categories:[...req.body.categories]}
+        const updated = { ...req.body, categories: [...req.body.categories] }
         console.log("!!>>>>>>>CORREGIR", updated);
         const theme = await Theme.findOneAndUpdate({ name }, updated, { new: true });
         if (!theme) {

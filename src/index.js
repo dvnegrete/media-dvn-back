@@ -15,9 +15,9 @@ app.use( express.json() );
 dbConnection();
 
 //Routes
-app.use('/api/user', require('./routes/user.route'));
-app.use('/api/category', require('./routes/category.route'));
-app.use('/api/theme', require('./routes/theme.route'));
-app.use('/api/post', require('./routes/post.route'));
+app.use('/api/users', require('./routes/user.route'));
+app.use('/api/categories', require('./routes/category.route'));
+app.use('/api/themes', require('./routes/theme.route'));
+app.use('/api/posts', require('./routes/post.route'));
 
 app.listen(port, () => console.log("Server online"))
