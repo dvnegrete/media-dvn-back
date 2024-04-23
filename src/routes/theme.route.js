@@ -4,6 +4,7 @@ const { getTheme, createTheme, updateTheme, deleteTheme, getThemeAll } = require
 
 const router = Router();
 
+router.get('/:id', checkRoleCreator, getTheme);
 router.get('/', checkRoleCreator, getTheme);
 router.get('/all', checkRoleCreator, getThemeAll);
 router.post('/', checkRoleAdmin, createTheme);

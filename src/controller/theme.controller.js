@@ -3,18 +3,16 @@ const Theme = require('../models/Theme');
 const Category = require('../models/Category');
 
 const getTheme = async (req = request, res = response) => {
-    const { name } = req.body;
+    const { id } = req.params;
     try {
-        const findTheme = await Theme.findOne({ name }).populate('categories');
+        const findTheme = await Theme.findById( id ).populate('categories');
         if (!findTheme) {
             res.status(400).json({
                 msg: 'Not found'
             });
         }
         else {
-            res.json({
-                findTheme,
-            });
+            res.json(findTheme);
         }
     } catch (error) {
         console.error(error);
