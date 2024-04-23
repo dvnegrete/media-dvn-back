@@ -24,12 +24,11 @@ const createCategory = async (req, res = response) => {
             res.status(400).json({
                 msg: 'Category already exists'
             });
+        } else {
+            const category = new Category(req.body);
+            await category.save();
+            res.json(category);
         }
-        const category = new Category(req.body);
-        await category.save();
-        res.json(
-            category,
-        );
     } catch (error) {
         console.error(error);
         res.status(500).json({

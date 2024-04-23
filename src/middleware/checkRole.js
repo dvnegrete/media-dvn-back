@@ -3,8 +3,8 @@ const User = require('../models/User');
 
 const checkRoleCreator = async (req = request, res = response, next) => {
     try {
-        const { username } = req.headers;
-        const [userDB] = await User.find({ username });
+        const { user } = req.headers;
+        const userDB = await User.findById({ _id: user });
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'
@@ -26,8 +26,8 @@ const checkRoleCreator = async (req = request, res = response, next) => {
 
 const checkRoleAdmin = async (req = request, res = response, next) => {
     try {
-        const { username } = req.headers;
-        const [userDB] = await User.find({ username });
+        const { user } = req.headers;
+        const userDB = await User.findById({ _id: user });
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'

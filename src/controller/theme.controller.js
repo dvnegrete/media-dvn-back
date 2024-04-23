@@ -21,6 +21,22 @@ const getTheme = async (req = request, res = response) => {
         res.status(500).json({ msg: "Internal Error Server" })
     }
 }
+const getThemeAll = async (req = request, res = response) => {
+    try {
+        const findTheme = await Theme.find().populate('categories');
+        if (!findTheme) {
+            res.status(400).json({
+                msg: 'Not found'
+            });
+        }
+        else {
+            res.json(findTheme);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
+    }
+}
 
 const createTheme = async (req = request, res = response) => {
 
@@ -29,7 +45,7 @@ const createTheme = async (req = request, res = response) => {
         const findTheme = await Theme.findOne({ name });
         if (findTheme) {
             res.status(409).json({
-                msg: 'the theme already exists '
+                msg: 'the theme already exists'
             });
         } else {
             const theme = new Theme({ name, description });
@@ -90,6 +106,7 @@ const deleteTheme = async (req, res = response) => {
 
 module.exports = {
     getTheme,
+    getThemeAll,
     createTheme,
     updateTheme,
     deleteTheme

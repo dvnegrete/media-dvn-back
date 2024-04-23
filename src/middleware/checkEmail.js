@@ -1,19 +1,19 @@
 const { request, response } = require("express");
-const User = require("../models/User");
 
 const checkEmail = async (req = request, res = response, next) => {
-    const { email } = req.body;
+    let email;
+    if (req.body && req.body.email) {
+        email = req.body.email;
+    }
+    if (req.query && req.query.email) {
+        email = req.query.email;
+    }
     try {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return res.status(400).json({ msg: "Format mail invalid" });
-        }
-
-        const findEmail = await User.findOne({ email });
-        if (findEmail) {
-            res.status(400).json({ msg: "User already exists" });
         } else {
-            
+
             next();
 
         }

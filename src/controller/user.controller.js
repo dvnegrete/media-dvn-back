@@ -12,11 +12,32 @@ const getUsers = async (req = request, res = response) => {
     }
 }
 
-const createUsers = async (req = request, res = response) => {
-    const { username } = req.body;
+const getUsersID = async (req = request, res = response) => {
+    const { email } = req.query;
     try {
+        const userFind = await User.findOne({email});
+        console.log(userFind);
+        if (userFind) {
+            res.status(200).json(userFind);
+        } else {
+            res.status(404).json({msg:"Not found"})
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Error Server" })
+    }
+}
+
+const createUsers = async (req = request, res = response) => {
+    const { username, email } = req.body;
+    try {
+        const findEmail = await User.findOne({ email });
         const findUsername = await User.findOne({ username });
-        if (findUsername) {
+        if (findEmail) {
+            res.status(400).json({ msg: "User already exists" });
+        }
+        else if (findUsername) {
             res.status(400).json({ msg: "Username not available" });
         } else {
             const user = new User(req.body);
@@ -30,15 +51,22 @@ const createUsers = async (req = request, res = response) => {
 }
 
 const updateUsers = async (req = request, res = response) => {
-    const { email } = req.body;
+    const { user, username, email } = req.body;
     try {
-        const user = await User.findOneAndUpdate({ email }, req.body, { new: true });
-        if (!user) {
+        if (username !== undefined && username.trim() === '') {
+            delete req.body.username;
+        }
+        if (email !== undefined && email.trim() === '') {
+            delete req.body.email
+        }
+        const userUpdate = await User.findByIdAndUpdate({ _id:user }, req.body, { new: true });
+        if (!userUpdate) {
             res.status(404).json({
                 msg: 'Not Found'
             });
+        } else {
+            res.json(userUpdate);
         }
-        res.json({ user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "Internal Error Server" })
@@ -58,6 +86,7 @@ const deleteUsers = async (req = request, res = response) => {
 
 module.exports = {
     getUsers,
+    getUsersID,
     createUsers,
     updateUsers,
     deleteUsers
