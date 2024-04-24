@@ -17,31 +17,6 @@ async function listBlobs() {
     return list
 }
 
-// async function uploadBlob(buffer, contentType, container, name) {
-//     try {
-//         const containerClient = blobServices.getContainerClient(container);
-//         await containerClient.uploadBlockBlob(name, buffer, buffer.length, {
-//             blobHTTPHeaders: {
-//                 blobContentType: contentType
-//             }
-//         });
-//         console.log('Blob cargado correctamente.');
-//         const blockBlobClient = containerClient.getBlockBlobClient(obj.name);
-//         return blockBlobClient.url;
-//     } catch (error) {
-//         console.error(error.message);
-//         return { "message": error.message }
-//     }
-// }
-
-// async function uploadBlobStorage(obj) {
-
-//     const buffer = Buffer.from(obj.file);
-//     const contentType = obj.file.mimetype;
-//     const file = await uploadBlob(buffer, contentType, obj.container, obj.name);
-//     return file;    
-// }
-
 async function uploadBlobStorage(obj) {
     try {
         const { buffer } = obj.file;

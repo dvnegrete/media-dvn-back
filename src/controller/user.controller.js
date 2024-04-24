@@ -15,12 +15,11 @@ const getUsers = async (req = request, res = response) => {
 const getUsersID = async (req = request, res = response) => {
     const { email } = req.query;
     try {
-        const userFind = await User.findOne({email});
-        console.log(userFind);
+        const userFind = await User.findOne({ email });
         if (userFind) {
             res.status(200).json(userFind);
         } else {
-            res.status(404).json({msg:"Not found"})
+            res.status(404).json({ msg: "Not found" })
         }
 
     } catch (error) {
@@ -59,7 +58,7 @@ const updateUsers = async (req = request, res = response) => {
         if (email !== undefined && email.trim() === '') {
             delete req.body.email
         }
-        const userUpdate = await User.findByIdAndUpdate({ _id:user }, req.body, { new: true });
+        const userUpdate = await User.findByIdAndUpdate({ _id: user }, req.body, { new: true });
         if (!userUpdate) {
             res.status(404).json({
                 msg: 'Not Found'

@@ -9,7 +9,7 @@ const themeSchema = Schema({
         type: String,
     },
     categories: [{
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,
         ref: 'Category'
     }]
 });

@@ -5,7 +5,7 @@ const Category = require('../models/Category');
 const getTheme = async (req = request, res = response) => {
     const { id } = req.params;
     try {
-        const findTheme = await Theme.findById( id ).populate('categories');
+        const findTheme = await Theme.findById(id).populate('categories');
         if (!findTheme) {
             res.status(400).json({
                 msg: 'Not found'
@@ -69,7 +69,7 @@ const updateTheme = async (req = request, res = response) => {
     const { name } = req.body;
     try {
         const updated = { ...req.body, categories: [...req.body.categories] }
-        console.log("!!>>>>>>>CORREGIR", updated);
+        //console.log("!!>>>>>>>CORREGIR", updated);
         const theme = await Theme.findOneAndUpdate({ name }, updated, { new: true });
         if (!theme) {
             res.status(404).json({

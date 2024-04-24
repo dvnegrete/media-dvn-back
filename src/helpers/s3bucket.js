@@ -4,7 +4,7 @@ const { s3Key, s3Secret, s3Bucket } = require("../config");
 
 const myRegion = "us-east-2";
 
-const uploadS3 = async (file, contentType)=>{
+const uploadS3 = async (file, contentType) => {
     try {
         const clientConnected = new S3Client({
             region: myRegion,
@@ -21,22 +21,18 @@ const uploadS3 = async (file, contentType)=>{
         };
         const parallelUploads3 = new Upload({
             client: clientConnected,
-            params: paramsConfig,            
+            params: paramsConfig,
         })
-        
+
         parallelUploads3.on("httpUploadProgress", (progress) => {
             console.log(progress);
-          });
-        
-          await parallelUploads3.done();
-        
+        });
+
+        await parallelUploads3.done();
+
     } catch (error) {
         console.log(error);
     }
-}
-
-const deleteS3 = async  ()=> {
-
 }
 
 module.exports = { uploadS3 };

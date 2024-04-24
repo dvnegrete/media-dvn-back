@@ -1,6 +1,5 @@
 const { request, response } = require('express');
 const Content = require('../models/Content');
-const Category = require('../models/Category');
 
 const getContent = async (req = request, res = response) => {
     try {
@@ -28,11 +27,8 @@ const createContent = async (req, res = response) => {
             });
         } else {
             const newContent = new Content(req.body);
-            const resp = await newContent.save();
-            console.log(resp);
+            await newContent.save();
             res.status(200).json(newContent);
-            // console.log((req.body));
-            // res.json({msg:"vamos"})
         }
     } catch (error) {
         console.error(error);

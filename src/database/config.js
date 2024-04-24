@@ -7,7 +7,7 @@ const dbConnection = async () => {
         await mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@${dbCluster}.wljfykg.mongodb.net/${dbName}`);
     } catch (error) {
         console.error(error);
-        throw new Error('Error al iniciar BD, ver LOGS');
+        throw new Error('Error starting BD, see LOGS');
     }
 }
 

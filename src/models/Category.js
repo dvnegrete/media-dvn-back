@@ -20,7 +20,6 @@ const categorySchema = Schema({
             validator: (array) => array.length > 0
         }
     }
-    //allowedExtensions: [String]
 });
 
 const Category = model('Category', categorySchema);

@@ -44,11 +44,10 @@ const upload = async (file) => {
 
 const loadAndGenerateURLs = async (req = request, res = response, next) => {
     const files = req.files;
-    const saveURLs = await Promise.all( files.map( async file => {
+    const saveURLs = await Promise.all(files.map(async file => {
         const url = await upload(file);
         return url;
     }))
-    console.log(saveURLs);
     req.body.media = [...saveURLs];
     next();
 }
