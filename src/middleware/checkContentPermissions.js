@@ -1,6 +1,5 @@
 const { request, response } = require("express");
 const Category = require("../models/Category");
-const PostContent = require("../models/PostContent");
 
 const contentPermissions = async (req = request, res = response, next) => {
     const { category, media } = req.body;

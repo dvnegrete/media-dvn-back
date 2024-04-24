@@ -18,6 +18,6 @@ dbConnection();
 app.use('/api/users', require('./routes/user.route'));
 app.use('/api/categories', require('./routes/category.route'));
 app.use('/api/themes', require('./routes/theme.route'));
-app.use('/api/posts', require('./routes/post.route'));
+app.use('/api/content', require('./routes/content.route'));
 
 app.listen(port, () => console.log("Server online"))

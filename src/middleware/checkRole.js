@@ -4,7 +4,9 @@ const User = require('../models/User');
 const checkRoleCreator = async (req = request, res = response, next) => {
     try {
         const { user } = req.headers;
-        const userDB = await User.findById({ _id: user });
+        const { userID } = req.body;
+        const _id = user === undefined ? userID : user;
+        const userDB = await User.findById({ _id });
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'

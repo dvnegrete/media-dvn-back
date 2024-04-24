@@ -6,6 +6,7 @@ const config = {
     dbPassword: process.env.DB_PASSWORD,
     dbCluster: process.env.DB_CLUSTER,
     dbName: process.env.DB_NAME,
+    AZURE_STRING: process.env.AZURE_STRING,
 };
 
 module.exports = config;
