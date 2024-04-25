@@ -19,9 +19,14 @@ async function listBlobs() {
 
 async function uploadBlobStorage(obj) {
     try {
+        const config = {
+            blobHTTPHeaders: {
+                blobContentType: obj.contentType
+            }
+        };
         const { buffer } = obj.file;
         const containerClient = blobServices.getContainerClient(obj.container);
-        await containerClient.getBlockBlobClient(obj.name).uploadData(buffer);
+        await containerClient.getBlockBlobClient(obj.name).uploadData(buffer, config);
         const blockBlobClient = containerClient.getBlockBlobClient(obj.name);
         return blockBlobClient.url;
     } catch (error) {

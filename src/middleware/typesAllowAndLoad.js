@@ -36,7 +36,8 @@ const upload = async (file) => {
     const fileBlob = {
         file: file,
         name: file.fieldname + '-' + uniqueSuffix + ext,
-        container: "media-dvn"
+        container: "media-dvn",
+        contentType: file.mimetype
     };
     const url = await uploadBlobStorage(fileBlob);
     return url;
