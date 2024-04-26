@@ -1,12 +1,12 @@
 const { request, response } = require('express');
 const User = require('../models/User');
+const { userExistsAPP } = require('../helpers/findUserApp');
 
 const checkUserDB = async  (req = request, res = response, next) => {
     try {
         const { user } = req.headers;
         const { userID } = req.body;
-        const _id = user === undefined ? userID : user;
-        const userDB = await User.findById({ _id });
+        const userDB = await userExistsAPP(userID, user);
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'
@@ -23,8 +23,7 @@ const checkRoleCreator = async (req = request, res = response, next) => {
     try {
         const { user } = req.headers;
         const { userID } = req.body;
-        const _id = user === undefined ? userID : user;
-        const userDB = await User.findById({ _id });
+        const userDB = await userExistsAPP(userID, user);
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'
@@ -48,8 +47,7 @@ const checkRoleAdmin = async (req = request, res = response, next) => {
     try {
         const { user } = req.headers;
         const { userID } = req.body;
-        const _id = user === undefined ? userID : user;
-        const userDB = await User.findById({ _id });
+        const userDB = await userExistsAPP(userID, user);
         if (!userDB) {
             return res.status(400).json({
                 msg: 'Invalid Login'
