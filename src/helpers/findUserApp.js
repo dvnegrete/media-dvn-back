@@ -4,7 +4,11 @@ const userExistsAPP = async (userBody, userHeaders) => {
     try {
         const _id = userHeaders === undefined ? userBody : userHeaders;
         const userDB = await User.findById({ _id });
-        return !!userDB;        
+        if (!!userDB) {
+            return userDB;
+        } else {
+            return false;
+        }
     } catch (error) {
         return false;
     }

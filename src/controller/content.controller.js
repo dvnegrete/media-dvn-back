@@ -95,9 +95,9 @@ const createContent = async (req, res = response) => {
 }
 
 const deleteContent = async (req, res = response) => {
-    const { title } = req.body;
+    const { _id } = req.params;
     try {
-        const post = await Content.findOne({ title });
+        const post = await Content.findOne({ _id });
         if (!post) {
             res.status(404).json({
                 msg: 'Not Found'
@@ -105,7 +105,7 @@ const deleteContent = async (req, res = response) => {
         } else {
             await Content.findByIdAndDelete(post);
             res.json({
-                msg: `Post ${title} deleted`
+                msg: `Content deleted`
             });
         }
     } catch (error) {

@@ -16,6 +16,6 @@ router.post('/',
     typesAllowForTheme,
     loadAndGenerateURLs,
     createContent);
-router.delete('/', checkRoleAdmin, deleteContent);
+router.delete('/:_id', checkRoleAdmin, deleteContent);
 
 module.exports = router;
