@@ -4,6 +4,7 @@ const { listBlobs } = require('../helpers/AzureBlob');
 const { userExistsAPP } = require('../helpers/findUserApp');
 
 const getContent = async (req = request, res = response) => {
+    const { search } = req.query;
     try {
         const contents = await Content.find().populate("thematicID").populate("userID");
         if (!contents) {
@@ -20,23 +21,16 @@ const getContent = async (req = request, res = response) => {
                 };
             })
 
-            res.status(200).json(contentsFilter);
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "Internal Error Server" })
-    }
-}
-
-const getContentWithMedia = async (req = request, res = response) => {
-    try {
-        const content = await Content.find().populate("userID");
-        if (!content) {
-            res.status(400).json({
-                msg: 'Post already exists'
-            });
-        } else {
-            res.json(content);
+            if (search !== undefined) {
+                const contentsSearch = contentsFilter.filter(item => {
+                    return item.title.toLowerCase().trim().includes(search.toLowerCase().trim())
+                        || item.userID.username.toLowerCase().trim().includes(search.toLowerCase().trim())
+                        || item.content.toLowerCase().trim().includes(search.toLowerCase().trim());
+                });
+                res.status(200).json(contentsSearch);
+            } else {
+                res.status(200).json(contentsFilter);
+            }
         }
     } catch (error) {
         console.error(error);
@@ -132,7 +126,6 @@ const getCountMediaFiles = async (req, res = response) => {
 
 module.exports = {
     getContent,
-    getContentWithMedia,
     getContentForID,
     createContent,
     deleteContent,

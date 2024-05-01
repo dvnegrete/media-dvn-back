@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const roles = require('../shared/enum/roles');
 
 const userSchema = Schema({
   username: {
@@ -13,7 +14,7 @@ const userSchema = Schema({
   },
   role: {
     type: String,
-    enum: ['ADMIN_ROLE', 'READ_ROLE', 'CREATOR_ROLE'],
+    enum: roles,
     default: 'READ_ROLE'
   },
 });
