@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const { dbUser, dbPassword, dbCluster, dbPort } = require("./../config");
+const { dbUser, dbPassword, dbCluster } = require("./../config");
 
 const dbConnection = async () => {
   try {
     mongoose.set("strictQuery", false);
     await mongoose.connect(
-      `mongodb://${dbUser}:${dbPassword}@${dbCluster}:${dbPort}`,
+      `mongodb+srv://${dbUser}:${dbPassword}@${dbCluster}/multimedia`,
       {
         maxPoolSize: 10,
         minPoolSize: 0,
